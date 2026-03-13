@@ -10,486 +10,295 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
         :root {
-            --pink-main: #60a5fa; /* Cool blue */
-            --pink-soft: #1e3a8a; /* Dark blue */
-            --blue-main: #9ca3af; /* Gray */
-            --blue-soft: #374151; /* Dark gray */
-            --white-soft: #111827; /* Very dark */
-            --dark-text: #f3f4f6; /* Light gray text */
-            --muted: #9ca3af;
+            --primary-main: #64748b;
+            --accent-blue: #38bdf8;
+            --night-deep: #020617;
+            --fog-overlay: rgba(226, 232, 240, 0.03);
+            --white-soft: #f8fafc;
+            --dark-text: #f1f5f9;
+            --muted: #94a3b8;
         }
 
         * { box-sizing: border-box; }
 
         body {
-            font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'Poppins', sans-serif;
             min-height: 100vh;
             margin: 0;
             padding: 20px 10px;
-            background:
-                radial-gradient(circle at top left, rgba(55, 65, 81, 0.4), transparent 60%),
-                radial-gradient(circle at bottom right, rgba(30, 58, 138, 0.3), transparent 60%),
-                linear-gradient(135deg, #0f172a 0%, #1e293b 35%, #0f172a 100%);
+            background: linear-gradient(180deg, #020617 0%, #0f172a 60%, #1e293b 100%);
             color: var(--dark-text);
+            overflow-x: hidden;
+        }
+
+        /* Fog Animation Effect */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 200%; height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            filter: blur(50px);
+            border-radius: 50%;
+            animation: moveFog 25s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes moveFog {
+            from { transform: translateX(-50%) translateY(10%); }
+            to { transform: translateX(0%) translateY(-10%); }
         }
 
         .app-shell {
             max-width: 480px;
             margin: 0 auto;
-            border-radius: 26px;
-            background:
-                radial-gradient(circle at top right, rgba(55, 65, 81, 0.5), transparent 60%),
-                radial-gradient(circle at bottom left, rgba(30, 58, 138, 0.4), transparent 60%),
-                linear-gradient(145deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.98));
-            border: 1px solid rgba(148, 163, 184, 0.15);
-            box-shadow:
-                0 20px 50px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(148, 163, 184, 0.1);
-            padding: 20px 16px 18px;
+            border-radius: 30px;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.8);
+            padding: 24px 20px;
             position: relative;
-            overflow: hidden;
+            z-index: 1;
         }
 
-        .app-shell::before {
-            content: "";
-            position: absolute;
-            inset: -40%;
-            background:
-                radial-gradient(circle at 10% 0, rgba(148, 163, 184, 0.08), transparent 55%),
-                radial-gradient(circle at 90% 100%, rgba(96, 165, 250, 0.08), transparent 55%);
-            opacity: 1;
-            pointer-events: none;
-        }
-
-        .app-inner { position: relative; z-index: 1; }
-        .fade-transition { transition: opacity 0.35s ease; }
-
-        #edit-users-btn {
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            z-index: 50;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-            padding: 0.45rem 0.95rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #f3f4f6;
-            background: linear-gradient(135deg, #374151, #4b5563, #1f2937);
-            background-size: 170% auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            cursor: pointer;
-            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 18px rgba(148, 163, 184, 0.1);
-        }
-
-        #edit-users-btn:hover {
-            background-position: right center;
-            transform: translateY(-1px);
-            box-shadow: 0 18px 38px rgba(0, 0, 0, 0.5), 0 0 24px rgba(148, 163, 184, 0.15);
-        }
-
-        .edit-btn-icon {
-            width: 16px; height: 16px; border-radius: 999px;
-            background: rgba(255, 255, 255, 0.15);
-            color: #d1d5db; font-size: 0.7rem;
-            display: flex; align-items: center; justify-content: center;
-        }
-
-        .search-container { margin: 0.6rem 0; position: relative; }
-        .search-input {
-            width: 100%; padding: 0.5rem 0.8rem 0.5rem 2.2rem;
-            border-radius: 999px; border: 1px solid rgba(148, 163, 184, 0.3);
-            background: rgba(30, 41, 59, 0.8); font-size: 0.8rem;
-            color: #f3f4f6; outline: none; transition: all 0.2s;
-        }
-        .search-input::placeholder { color: #9ca3af; }
-        .search-input:focus { border-color: #60a5fa; background: #1e293b; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15); }
-        .search-icon { position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #9ca3af; font-size: 0.85rem; }
-
-        .user-progress-bar { height: 4px; width: 100%; background: #374151; border-radius: 999px; overflow: hidden; margin-top: 0.35rem; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, #60a5fa, #9ca3af); width: 0%; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .user-progress-text { font-size: 0.65rem; color: #9ca3af; text-align: right; margin-top: 2px; font-weight: 500; }
-
-        .link-btn.visited { background: #1e293b; border-color: rgba(148, 163, 184, 0.2); color: #9ca3af; }
-        .link-btn.visited .url-label { text-decoration: line-through; opacity: 0.7; }
-        .link-status-icon { font-size: 0.8rem; color: #34d399; margin-right: 0.3rem; display: none; }
-        .link-btn.visited .link-status-icon { display: inline-block; }
-
-        #welcome-page { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; gap: 0.75rem; padding: 6px; }
-        .badge-top { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); display: inline-flex; align-items: center; gap: 0.4rem; }
-        .badge-dot { width: 7px; height: 7px; border-radius: 999px; background: #60a5fa; box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2); }
-        .welcome-title { font-family: 'Roboto Mono', monospace; font-size: 1.9rem; font-weight: 700; line-height: 1.3; color: #f3f4f6; }
-        .welcome-sub { font-size: 0.9rem; color: var(--muted); }
-        .welcome-panel { margin-top: 0.5rem; border-radius: 18px; padding: 10px 12px; background: radial-gradient(circle at top left, rgba(75, 85, 99, 0.2), transparent 60%), radial-gradient(circle at bottom right, rgba(55, 65, 81, 0.2), transparent 60%), linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid rgba(148, 163, 184, 0.15); }
-        .welcome-panel-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.18em; color: #9ca3af; margin-bottom: 4px; }
-        .welcome-panel-text { font-size: 0.8rem; color: #d1d5db; }
+        .welcome-title { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; font-weight: 700; line-height: 1.2; color: #fff; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
+        .project-name { color: var(--accent-blue); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
 
         #start-btn {
-            margin-top: 1.6rem; align-self: flex-start; padding: 0.75rem 2.5rem; border-radius: 999px; border: none; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer;
-            background-image: linear-gradient(135deg, #4b5563, #6b7280, #374151); background-size: 180% auto; color: #fff;
-            box-shadow: 0 14px 36px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(148, 163, 184, 0.2);
-            transition: background-position 0.35s ease, transform 0.15s ease, box-shadow 0.15s ease;
+            margin-top: 2rem; padding: 0.8rem 3rem; border-radius: 999px;
+            border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);
+            color: #38bdf8; font-weight: 700; letter-spacing: 0.1em;
+            transition: all 0.4s ease; cursor: pointer;
         }
-        #start-btn:hover { background-position: right center; transform: translateY(-1px); box-shadow: 0 18px 44px rgba(0, 0, 0, 0.5), 0 0 24px rgba(148, 163, 184, 0.15); }
-        #start-btn:active { transform: translateY(1px) scale(0.98); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4), 0 0 16px rgba(148, 163, 184, 0.2); }
-
-        .main-header { padding: 4px 4px 8px; border-bottom: 1px solid rgba(75, 85, 99, 0.5); margin-bottom: 0.7rem; }
-        .title-row { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
-        .project-name { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.21em; color: #9ca3af; }
-        .project-pill { padding: 0.25rem 0.7rem; border-radius: 999px; border: 1px solid rgba(148, 163, 184, 0.3); background: radial-gradient(circle at top left, rgba(75, 85, 99, 0.3), transparent 60%), linear-gradient(135deg, #1e293b, #0f172a); font-size: 0.7rem; color: #d1d5db; white-space: nowrap; }
-        .main-title { font-family: 'Roboto Mono', monospace; font-size: 1.3rem; font-weight: 700; margin-top: 0.35rem; color: #f3f4f6; }
-        .main-sub { font-size: 0.8rem; color: var(--muted); }
-        .datetime-wrapper { margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; }
-        .datetime-pill { font-size: 0.74rem; color: #d1d5db; padding: 0.3rem 0.8rem; border-radius: 999px; background: #1e293b; border: 1px solid rgba(75, 85, 99, 0.5); display: inline-flex; align-items: center; gap: 0.35rem; }
-        .inline-dot { width: 7px; height: 7px; border-radius: 999px; background: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.2); }
-        .info-hint { font-size: 0.75rem; color: #9ca3af; text-align: right; }
-
-        .users-section { margin-top: 0.8rem; }
-        .users-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.7rem; max-height: calc(100vh - 280px); overflow-y: auto; padding-right: 2px; padding-bottom: 4px; }
-        .users-grid::-webkit-scrollbar { width: 6px; }
-        .users-grid::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.5); border-radius: 999px; }
-        .users-grid::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #4b5563, #374151); border-radius: 999px; }
+        #start-btn:hover { background: rgba(56, 189, 248, 0.15); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); transform: translateY(-2px); }
 
         .user-card {
-            position: relative; display: flex; flex-direction: column; gap: 0.5rem; padding: 0.7rem 0.75rem; border-radius: 18px; border: 1px solid rgba(148, 163, 184, 0.2);
-            background: radial-gradient(circle at top left, rgba(75, 85, 99, 0.2), transparent 60%), radial-gradient(circle at bottom right, rgba(55, 65, 81, 0.15), transparent 60%), linear-gradient(135deg, #1e293b, #0f172a);
-            cursor: pointer; overflow: hidden; opacity: 0; transform: translateY(14px) scale(0.97); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3);
-            transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
-            animation-name: cardPopIn, cardFloat; animation-duration: 0.42s, 3.1s; animation-timing-function: ease, ease-in-out; animation-fill-mode: forwards, both; animation-iteration-count: 1, infinite; animation-delay: var(--stagger, 0s), 0.5s;
+            display: flex; flex-direction: column; gap: 0.5rem;
+            padding: 1.2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.02); cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-bottom: 0.8rem;
         }
+        .user-card:hover { background: rgba(56, 189, 248, 0.04); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
 
-        .user-card::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 10px; background: rgba(255, 255, 255, 0.2); border-radius: 999px; transform: translate(-50%, -50%) scale(0); opacity: 0; pointer-events: none; }
-        .user-card:active::after { animation: ripple 0.45s ease-out; }
-        .user-card-top { display: flex; align-items: center; gap: 0.6rem; }
-        .avatar-circle { position: relative; flex-shrink: 0; width: 38px; height: 38px; border-radius: 999px; background: conic-gradient(from 210deg, #60a5fa, #9ca3af, #60a5fa); display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: 0.8rem; box-shadow: 0 0 0 3px rgba(30, 41, 59, 0.8), 0 8px 18px rgba(0, 0, 0, 0.3); }
-        .avatar-circle span { position: relative; z-index: 1; }
-        .avatar-circle::after { content: ""; position: absolute; inset: 3px; border-radius: inherit; background: linear-gradient(135deg, #4b5563, #374151); opacity: 0.9; }
-        .user-main { flex: 1; position: relative; z-index: 1; }
-        .user-name { font-size: 0.9rem; font-weight: 600; color: #f3f4f6; }
-        .user-sub { font-size: 0.74rem; color: #9ca3af; }
-        .user-meta-row { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; margin-top: 0.25rem; }
-        .badge-link { font-size: 0.7rem; padding: 0.18rem 0.6rem; border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.5); background: #1e293b; color: #d1d5db; display: inline-flex; gap: 0.25rem; align-items: center; }
-        .badge-dot-small { width: 6px; height: 6px; border-radius: 999px; background: linear-gradient(135deg, #60a5fa, #9ca3af); }
-        .user-index { font-size: 0.7rem; color: #6b7280; }
-        .user-card:hover { transform: translateY(-2px) scale(1.01); border-color: rgba(148, 163, 184, 0.4); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 18px rgba(148, 163, 184, 0.1); }
-        .user-card:active { transform: translateY(1px) scale(0.99); box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3); }
-        .footer-note { margin-top: 0.4rem; font-size: 0.72rem; color: var(--muted); text-align: center; }
+        .avatar-circle { width: 40px; height: 40px; border-radius: 12px; background: #1e293b; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-blue); font-weight: 700; }
+        .search-input { width: 100%; padding: 0.7rem 1rem; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(2, 6, 23, 0.4); color: #fff; margin-bottom: 1.5rem; outline: none; }
+        
+        #edit-users-btn { position: fixed; top: 16px; right: 16px; z-index: 50; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 1rem; font-size: 0.7rem; color: var(--muted); background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); cursor: pointer; }
 
-        #user-links-view { display: none; opacity: 0; }
-        .links-header { display: flex; align-items: center; gap: 0.7rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(75, 85, 99, 0.5); margin-bottom: 0.8rem; }
-        .back-btn { border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.8); background: #1e293b; color: #d1d5db; padding: 0.3rem 0.85rem; font-size: 0.78rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem; }
-        .back-btn:hover { background: #374151; }
-        .links-title-block { flex: 1; }
-        .links-user-name { font-size: 0.92rem; font-weight: 600; color: #f3f4f6; }
-        .links-subtitle { font-size: 0.76rem; color: #9ca3af; }
-        .links-body { margin-top: 0.4rem; }
-        .links-info { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.5rem; }
-        .links-buttons { display: grid; grid-template-columns: 1fr; gap: 0.45rem; }
-        .link-btn { border-radius: 14px; border: 1px solid rgba(75, 85, 99, 0.5); background: radial-gradient(circle at top left, rgba(75, 85, 99, 0.3), transparent 60%), linear-gradient(135deg, #1e293b, #0f172a); color: #d1d5db; padding: 0.45rem 0.8rem; font-size: 0.8rem; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
-        .link-btn span.url-label { font-weight: 500; }
-        .link-btn span.url-small { font-size: 0.7rem; color: #9ca3af; opacity: 0.9; }
-        .link-btn:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), 0 0 16px rgba(148, 163, 184, 0.1); }
-        .link-actions { display: flex; align-items: center; gap: 0.5rem; }
-        .btn-copy { background: transparent; border: none; color: #60a5fa; font-size: 0.75rem; cursor: pointer; padding: 4px; border-radius: 4px; transition: background 0.2s; }
-        .btn-copy:hover { background: rgba(96, 165, 250, 0.1); }
+        .link-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; margin-bottom: 8px; text-align: left; transition: 0.2s; }
+        .link-item:hover { border-color: var(--accent-blue); background: rgba(56, 189, 248, 0.05); }
 
-        .edit-panel-backdrop { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 60; opacity: 0; transition: opacity 0.3s ease; }
-        .edit-panel-backdrop.show { display: flex; opacity: 1; }
-        .edit-panel { width: 95%; max-width: 550px; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(12px); border-radius: 24px; border: 1px solid rgba(75, 85, 99, 0.6); box-shadow: 0 20px 60px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(148, 163, 184, 0.1); padding: 20px; transform: scale(0.95); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .edit-panel-backdrop.show .edit-panel { transform: scale(1); }
-        .edit-panel-title { font-size: 0.95rem; font-weight: 700; color: #f3f4f6; }
-        .edit-panel-sub { font-size: 0.78rem; color: var(--muted); margin-top: 2px; margin-bottom: 0.5rem; }
-        .edit-toolbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; gap: 0.5rem; }
-        .btn-add-user { border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.7); background: radial-gradient(circle at top left, rgba(75, 85, 99, 0.9), rgba(55, 65, 81, 0.9)); padding: 0.25rem 0.85rem; font-size: 0.75rem; color: #fff; display: inline-flex; align-items: center; gap: 0.35rem; cursor: pointer; }
-        .btn-add-user span.icon { font-size: 0.8rem; }
-        .edit-help { font-size: 0.7rem; color: #9ca3af; text-align: right; flex: 1; }
-        .edit-users-list { max-height: 400px; overflow-y: auto; padding-right: 8px; margin-bottom: 1.5rem; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 8px; background: rgba(15,23,42,0.5); }
-        .edit-users-list::-webkit-scrollbar { width: 6px; }
-        .edit-users-list::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #4b5563, #374151); border-radius: 999px; }
-        .edit-row { padding: 0.4rem 0; border-bottom: 1px dashed rgba(75, 85, 99, 0.5); }
-        .edit-row-top { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; margin-bottom: 0.25rem; }
-        .edit-label { font-size: 0.75rem; color: #9ca3af; }
-        .edit-input { flex: 1; border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.5); background: #1e293b; padding: 0.3rem 0.6rem; font-size: 0.78rem; color: #f3f4f6; outline: none; }
-        .edit-input:focus { border-color: #60a5fa; box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.2); }
-        .btn-delete-user { border-radius: 999px; border: 1px solid rgba(239, 68, 68, 0.5); padding: 0.26rem 0.6rem; font-size: 0.72rem; background: linear-gradient(135deg, #7f1d1d, #991b1b); color: #fecaca; cursor: pointer; }
-        .btn-delete-user:hover { filter: brightness(1.1); }
-        .edit-row-bottom { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 1.7fr); gap: 0.35rem; align-items: flex-start; margin-top: 0.15rem; }
-        .link-mode-select { width: 100%; border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.6); background: #1e293b; color: #f3f4f6; font-size: 0.75rem; padding: 0.25rem 0.4rem; }
-        .link-single-input { border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.6); background: #1e293b; color: #f3f4f6; font-size: 0.75rem; padding: 0.3rem 0.5rem; width: 100%; }
-        .link-multi-textarea { border-radius: 10px; border: 1px solid rgba(75, 85, 99, 0.6); background: #1e293b; color: #f3f4f6; font-size: 0.75rem; padding: 0.3rem 0.5rem; width: 100%; resize: vertical; min-height: 54px; }
-        .link-multi-hint { font-size: 0.7rem; color: #6b7280; margin-top: 2px; }
-        .edit-actions { display: flex; justify-content: flex-end; gap: 0.45rem; }
-        .btn-ghost { border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.6); background: #1e293b; padding: 0.32rem 0.9rem; font-size: 0.78rem; color: #d1d5db; cursor: pointer; }
-        .btn-primary { border-radius: 999px; border: 1px solid rgba(75, 85, 99, 0.8); background: linear-gradient(135deg, #4b5563, #374151, #1f2937); padding: 0.32rem 1rem; font-size: 0.78rem; color: #fff; font-weight: 600; cursor: pointer; }
-        .btn-primary:hover { box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4), 0 0 18px rgba(148, 163, 184, 0.15); }
-
-        @keyframes cardPopIn { 0% { opacity: 0; transform: translateY(18px) scale(0.9); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes cardFloat { 0% { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3); } 50% { box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(148, 163, 184, 0.15); } 100% { box-shadow: 0 8px 22px rgba(0, 0, 0, 0.3); } }
-        @keyframes ripple { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0.7; } 100% { transform: translate(-50%, -50%) scale(18); opacity: 0; } }
-
-        @media (max-width: 640px) { .app-shell { padding: 18px 13px 16px; } .welcome-title { font-size: 1.7rem; } .main-title { font-size: 1.2rem; } }
-
-        body.hacker-mode { --pink-main: #00ff41; --pink-soft: #0d0208; --blue-main: #008f11; --blue-soft: #003b00; --white-soft: #000000; --dark-text: #00ff41; --muted: #008f11; background: #000 !important; font-family: 'Courier New', monospace !important; }
-        body.hacker-mode .app-shell { background: #000 !important; border-color: #00ff41 !important; box-shadow: 0 0 20px rgba(0, 255, 65, 0.2); }
-        body.hacker-mode * { border-radius: 0 !important; }
-        body.hacker-mode .welcome-title, body.hacker-mode .main-title { text-shadow: 0 0 5px #00ff41; }
+        .edit-panel-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; }
+        .edit-panel { background: #0f172a; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 25px; border-radius: 30px; width: 95%; max-width: 500px; }
     </style>
 </head>
 <body>
-    <button id="edit-users-btn" type="button">
-        <span class="edit-btn-icon">✎</span>
-        <span>Edit User</span>
-    </button>
+    <button id="edit-users-btn">CONFIGURATION</button>
 
     <div class="app-shell">
-        <div class="app-inner">
-            <div id="welcome-page" class="fade-transition" style="opacity:1;">
-                <div class="badge-top">
-                    <span class="badge-dot"></span>
-                    <span>ACORN CONSULTANT</span>
-                </div>
-                <h1 class="welcome-title">Project KAI<br>Survey Panel</h1>
-                <p class="welcome-sub">Pusat akses survey terstruktur untuk setiap enumerator, terintegrasi dan mudah dipantau.</p>
-                <div class="welcome-panel">
-                    <div class="welcome-panel-title">RANGKUMAN</div>
-                    <div class="welcome-panel-text">
-                        • Multi user dengan link survey yang bisa diatur per user<br>
-                        • Mode 1 link atau multiple link untuk setiap user<br>
-                        • Tambah / hapus user sesuai kebutuhan lapangan
-                    </div>
-                </div>
-                <button id="start-btn">ENTER DASHBOARD</button>
-            </div>
+        <div id="welcome-page">
+            <div class="project-name">INTERNAL ACCESS</div>
+            <h1 class="welcome-title">Project KAI</h1>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">Cloudy night protocol initialized. Please select your profile to continue.</p>
+            <button id="start-btn">BEGIN SURVEY</button>
+        </div>
 
-            <div id="main-view" class="fade-transition" style="display:none; opacity:0;">
-                <div class="main-header">
-                    <div class="title-row">
-                        <div>
-                            <div class="project-name">PROJECT KAI</div>
-                            <h2 class="main-title">KAI Survey Hub</h2>
-                        </div>
-                        <div class="project-pill">Enumerator Access</div>
-                    </div>
-                    <div class="main-sub">Panel ini berisi daftar user yang masing-masing dapat diarahkan ke 1 atau beberapa link survey.</div>
-                    <div class="search-container">
-                        <span class="search-icon">🔍</span>
-                        <input type="text" id="search-users" class="search-input" placeholder="Cari nama user...">
-                    </div>
-                    <div class="datetime-wrapper">
-                        <div class="datetime-pill">
-                            <span class="inline-dot"></span>
-                            <span id="datetime-text"></span>
-                        </div>
-                        <div class="info-hint">Klik kartu user untuk membuka link atau daftar link.</div>
-                    </div>
-                </div>
-                <div class="users-section">
-                    <div id="users-grid" class="users-grid"></div>
-                </div>
-                <div class="footer-note">Pengelolaan user dilindungi password: <strong>GOOD LUCK!!!</strong>.</div>
+        <div id="main-view" style="display:none;">
+            <div class="project-name">DASHBOARD</div>
+            <h2 class="welcome-title" style="font-size: 1.5rem;">Survey Hub</h2>
+            <div style="margin-top: 1.5rem;">
+                <input type="text" id="search-users" class="search-input" placeholder="Find your name...">
             </div>
+            <div id="users-grid"></div>
+        </div>
 
-            <div id="user-links-view" class="fade-transition">
-                <div class="links-header">
-                    <button id="back-from-links" class="back-btn" type="button">← Kembali</button>
-                    <div class="links-title-block">
-                        <div class="links-user-name" id="links-user-name"></div>
-                        <div class="links-subtitle">Pilih salah satu link di bawah untuk membuka halaman survey.</div>
-                    </div>
-                </div>
-                <div class="links-body">
-                    <div class="links-info" id="links-info-text"></div>
-                    <div id="links-buttons-container" class="links-buttons"></div>
-                </div>
-            </div>
+        <div id="user-links-view" style="display:none;">
+            <button id="back-from-links" style="color:var(--accent-blue); font-size: 0.8rem; margin-bottom: 1.5rem; background:none; border:none; cursor:pointer;">← Return to List</button>
+            <h3 id="links-user-name" class="welcome-title" style="font-size: 1.3rem;"></h3>
+            <div id="links-buttons-container" style="margin-top: 1.5rem;"></div>
         </div>
     </div>
 
     <div id="edit-panel-backdrop" class="edit-panel-backdrop">
         <div class="edit-panel">
-            <div class="edit-panel-title">Kelola User Project KAI</div>
-            <div class="edit-panel-sub">Ubah nama, hapus user, atau atur mode link untuk setiap user.</div>
-            <div class="edit-toolbar">
-                <button id="add-user-btn" class="btn-add-user" type="button">
-                    <span class="icon">＋</span>
-                    <span>Tambah User</span>
-                </button>
-                <div class="edit-help">Minimal 1 user tersisa.</div>
-            </div>
-            <div id="edit-users-list" class="edit-users-list"></div>
-            <div class="edit-actions">
-                <button id="edit-cancel" class="btn-ghost" type="button">Batal</button>
-                <button id="edit-save" class="btn-primary" type="button">Simpan</button>
+            <h3 style="font-weight: 700; margin-bottom: 1rem;">System Configuration</h3>
+            <div id="edit-users-list" style="max-height: 400px; overflow-y: auto;"></div>
+            <div style="display:flex; justify-content: flex-end; gap: 10px; margin-top: 1.5rem;">
+                <button id="edit-cancel" style="color: var(--muted); background:none; border:none; cursor:pointer;">Cancel</button>
+                <button id="edit-save" style="background: var(--accent-blue); color: #000; padding: 0.6rem 2rem; border-radius: 999px; font-weight: 700; border:none; cursor:pointer;">Apply</button>
             </div>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const DEFAULT_SURVEY_LINK = "https://survey.xmfactory.com/survey?b=1025655&l=52472bf1b710780c";
-            const PASSWORD_EDIT = "Aco123";
-            const STORAGE_KEY = "projectKAIUsersV3";
+            const STORAGE_KEY = "projectKAI_Final_V1";
+            const PASSWORD = "Aco123";
 
-            const welcomePage = document.getElementById('welcome-page'), startBtn = document.getElementById('start-btn'), mainView = document.getElementById('main-view'), userLinksView = document.getElementById('user-links-view'), backFromLinks = document.getElementById('back-from-links'), usersGrid = document.getElementById('users-grid'), datetimeText = document.getElementById('datetime-text'), editBtn = document.getElementById('edit-users-btn'), editBackdrop = document.getElementById('edit-panel-backdrop'), editUsersList = document.getElementById('edit-users-list'), addUserBtn = document.getElementById('add-user-btn'), editCancel = document.getElementById('edit-cancel'), editSave = document.getElementById('edit-save'), searchInput = document.getElementById('search-users'), linksUserName = document.getElementById('links-user-name'), linksInfoText = document.getElementById('links-info-text'), linksButtonsContainer = document.getElementById('links-buttons-container'), projectNameEl = document.querySelector('.project-name');
-
-            let users = [];
-            let currentLinksUser = null;
-            const LINK_STATUS_KEY = "projectKAILinkStatusV1";
-            let linkStatus = {};
-
-            function loadLinkStatus() { try { const stored = localStorage.getItem(LINK_STATUS_KEY); if (stored) linkStatus = JSON.parse(stored); } catch(e) {} }
-            function saveLinkStatus() { localStorage.setItem(LINK_STATUS_KEY, JSON.stringify(linkStatus)); }
-            function markLinkAsVisited(userId, url) { if (!linkStatus[userId]) linkStatus[userId] = {}; if (!linkStatus[userId][url]) { linkStatus[userId][url] = true; saveLinkStatus(); return true; } return false; }
-            function getVisitedCount(user) { if (!linkStatus[user.id]) return 0; let count = 0; user.links.forEach(url => { if (linkStatus[user.id][url]) count++; }); return count; }
-
-            // MODIFIED: createDefaultUsers with EMPTY link arrays
+            // FUNGSI INI SUDAH DIMODIFIKASI: Cukup isi link di dalam backticks (``)
+            // Satu link per baris, tanpa perlu tanda kutip (') atau koma (,)
             function createDefaultUsers() {
-    return [
-        {
-            id: 'kai-1',
-            name: 'Mawar',
-            mode: 'multi',
-            links: [
-                'https://link-mawar-1.com',
-                'https://link-mawar-2.com'
-            ]
-        },
-        {
-            id: 'kai-2',
-            name: 'Lisa',
-            mode: 'multi',
-            links: [
-                'https://link-lisa-1.com'
-            ]
-        },
-        {
-            id: 'kai-3',
-            name: 'Parwati',
-            mode: 'multi',
-            links: [
-                'https://link-parwati-1.com',
-                'https://link-parwati-2.com',
-                'https://link-parwati-3.com'
-            ]
-        },
-        {
-            id: 'kai-4',
-            name: 'Purwasiyant',
-            mode: 'multi',
-            links: [
-                'https://link-purwa-1.com'
-            ]
-        }
-    ];
-}
+                return [
+                    {
+                        id: 'kai-1', name: 'Mawar', mode: 'multi',
+                        links: `
+                            https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=OmusE7gq5vqNJpDLMdSM-E0hkiQIUqsjHr7ZjQubu6eBi08prFWDI0ePfoiYMtzH5J92xznpO50vumhejrnGFA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=ZD887RP6PU0Dsx60FKiRYsn0CIpHvHUY3FsygQTYpG7-YVxNl1hRfW78RgaRR0jLxYE5wuPNx1tQYIdfFtM0eQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=pVLvmU6JxU75hqz6mycz0imq69S_-5LHryLWj0-ufmQJLzG4KJZBNZGy3syrr9He_3VuN7LOSNlyRhHxUH1gsg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=CxQtxcQu_v7gSI6Mi3x56RovmoDhOBejKiHhzBQzfm-KhFr_c7IgPcGoRbIZFg8hGO_3Ox2So1EhAUUIGa9FBg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=MrD8Ji1LJXBtA_zzgi9s-WJFeoODVwfsdja3nc2tbFgg6g8N_GuUJimof_hczX77N6Z6b8jHytJTv12bOGeK8A2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=q2qqn4FW-xjqxywtlrwIdrkGfcc2kfUMi8bM-7m_ybxH7WHlkUJ8MfMEKbbXIXjUn7BDSjBT-QzKbN_JuVgKmA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=tKHknRvAdB93LhHNjKp_75FACorU-Hp9TBBuszhvceXf-EqE7wbh0tuCNatZic7Pxzr09Lji2Dkmn6rSdSnXGg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=JOw_4zJIy_winPGT3a84yF31XbevEggz9aiBQGMxAHzoBZjmp2Yf4kkwUC5lh74vOCN8amMfQ3yHvOGWfyyfWA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=63btQgbxQuH-7Qy3V42sRSgHtEpje5oiHV3tFQ0EHQCv3LRFj43iSRXc1PnBCSIX-_cT6vtL9zRgH3_blCuM9w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=y3kr_gmC7ax2UB77a5niR9T3jTb94xMtxA4YbvmBMl5uV3O9vZ-rIIwzwscOz90ybc3US8eMZBF1iivJNeitKg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=Gw931OAwFbzfB7EzQVOSYN5lOMCj0pesrZ0S6BGxuKUYl4Yj-N41g9ukUvnXLx_VqsAsX6N_7VLPU1QrDk2gyg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=kNOU2AajNayxZGWVyWIg9ErLD2wfQ5NO-7RO2YLp_LstjSHkUBhWSL6SSl4QLNT2GcslTVo4myseyetBsEPg_Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=bSd2NgrHnqFmJlt0Be09nVIwLPnDcI5lkXpHEV4jGhhbop6vLwbUO98mz6yE8Vnz62xnSf1hcNjFCNi9c0CjTw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=tT-cH6uQwkNiUYsJo1LYxVGEVO-SVRnAepxkV508n4yjzdtfm326qenuOlC272o30u0YU8OFOPR-8olby1JDjA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=wnXTw78-ICSzc1DCU99pujCidt0WM7ZERlPGSOxIhLDQM67hMwe-5vcAtyoqBpeBhMLx_0Go-fM5sJA1D7aA5w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=AvTC8N_w9taXdvuHApoTwZfeBr1hDqbMEffBC9javODXeOByPN7L99D9Eh7Wqq7kiqlgBYHFqbMkwGlP1r4t2A2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=szDsIdB4tecfbq74B4eMz6rCzYjhyzu8wXMNO1ZMUVQ8J0bKmlNGiA033SF20717vDsre-2iepFkRk8TZibYIQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=e4fF4344qZ5OCp1pOLDoIxaOAy8eOUYkzVVan175Y97sUwN-vfutvSKbX8N3YhJerIQk4W7uXc1GGdvOaKUmyw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=qTLkES1Tn3zdiHthcKl27eF-jPcbdnWXdzCn-2Lop72YuNMefDfIjg76Xs5KG-RrsokNBBQcSWByKozgoeLGKw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=J-5RxnTDxvyFfnEo8kJBRv48cHXdiKi5z0PXoBRnd1dDSj43Dkyfi9dhFUxzdjanfbJUhG1Us9LheaCAL3Q-MQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=Z6lsYf_y0eZogBMIoVSjzqSi0FPe22ssdZvI5883DI6zlLZjCQn4fww0Pqkt-AmTt0Ek4rFJvrdxa0OmuLrELA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=jqZFGfid-CGWq598k2QURqdawiENRynVCAonK7BPypEYcMMbsgKhsir3ZsnO4pPqTlcabnNMCl8Y8QJ1ykm7Kg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=Va1M16BqAxYb0qq72yui-3_o6CzHrdE0Jb2Z3qr5hO_YyBNaqaF9qMUF0D3npuBiXkrcKc5gKeGVumn7i4rnWA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=tLhaWkiAmv41Yn8wEwjzxjwvHu5QbwZamrkh9FR9IjYczV4lNmdgs_HQ6a_1Mx1avyhIPMYVQ3sqlwpa3Vx4bw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1K9EU89L7MykabN_YVSarjm3YECfsU2XRF-7D8d9TXD6ZgOwgYuQtW5anPBIHq5AefywzXnv2V5QpKdp9p7a_Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=xR5p2SlQj7bGtZhaA3_WpNkBk1fu7QzogqVirIC_cvsuIoY4OioqRZ1dJ_SN6LE-fM4S8CWBh5uVZFn1pwgO-g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=4PWm2yK8CjnZWn6TLkoV5w1je-iiFRNV6DnRmzOSnyI5NZGyypeU2Bk7FKcS_TZk2LjrVI2h74cgh-iEumPe7g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=TvgX5ATnaGNWAITjqsLR8ndyQnn3iP7I_ylQr-nrw5bAM8Dp1mWEBbSIwyVNFKcIRZlJj7nHCXuOGtkXH0OZKg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=DOI8fvxoU57dG8WlYEvsidZPFsxW0aZxvKTgzFp9c9yxGLN6Pj1TALiTxzOMlR1H0-yvs-kPUI0VjAffmwSE-w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=6OLAxRbonMcWzTiBw6e3gIeGod0GV_58D83gBdUPR-FOyjByD76TZ_l5euiLpiBLx2AuPvEm8--ALEuw5s9rdg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=ulTDVnURaqsp1PUyLwQFVvdeNWYRNy8S2gZoi2j6o6k1uPVqe598USVSS9Y4Vc3ZIGjYWtsH3S09zx5wCyhJzw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=sF87oRcbwrH55g-Z9qgYC3TkXuVw3NUxnV5oxmS9T96Mj0TyKoM3wu4Ycbbe4K652wJOnrazpEetDnESBK8o2A2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=zZWqutoLHoNl8VcFD2sWfBSLFUAlwVAgKFlEd2B5HHC9B04c53zJb2rqrGXZfvB4RfM37Y6jJfhHksZChxIkaw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=F8u9ZzLmkX4U6FQZXM_4tQuUB-ja8v7FaeUXv-jXLbvWGM2eJlUqMSjKDOIEllWBMekJU6V-fMYO925F_UZxow2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=bqmuQDijBp3IwGgv_FKUfsZ5W3jIWHAxJ_gdUIzGGoK6xBs4kP-WlXz_jqRxb5H_IQcrJkWUdumzxRY1y_mpNA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=M6LMlL4vzWZhHiVRWauHjm7crZptvTAGm-d4-ISoxJcGBh011LsGHC9dxqsckoAma9zfsIo0mMgcBLXmkbql8Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=fnommemHlL1in1B2JFvHqKPgwK5EMlsMqPMvPKhGz0d-gcIKWE7LMbYInUaCNnWQ9c0nXJkPmv6GVHH3B1Hk7g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=4-4jGIddzLTITjoV44lySSLK4bpS6BRZNj3FVAFcMx0-YERq4tkn1q0MSgW0Z4DYmObg5Co4phxEFvIwMStStg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=17RzZdvkmg0sjuvXBvrCP8Drl7Apl0NAlrgn8sO2uBVFj1ncjj6Y4rcF1Nqp7HVeEaBlqOUa1OdEIT45Wq_d0w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=-HYlXNMNe2HbUjTaBLUajPFb7F_PupwipnR-OwgZ7kQQ6hYDLiVv_JzkKm1uzupKco5uHAMWxIhT_CcRbRpY6w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=BuysVyS6Wsqt2BZbMCRaXmO8SOYknNPX3PeZ0RjbfMt7mh0NJiQj5RcQG2WawC9OJI0VGQRHKXvvNNX9daU46A2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=6jjjtOB0pGUDKvvXqkMiLnY_2UyZQPcWXaty0nl0AIWHbXSufZb_VLaRmjbU3gS070XnL7rdx3cwXBRERl_75A2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=JR7QFk4LzwOmX3YabaBCxjrJeXNW5PGMNt9M_5ER9EzFbCFET3Bi0GX-WaKsO7NulfK2Rctyv822e4ulQ1x_Zg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=ELqLGLYzMvtKLzAB8I-qvFQc9hL7dsXCBVjFESfW48U5GcoCRfUvuz21HnlO5l0i_AYmxxgMZVoode9Lld3ptA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=OQZvX3tULi9MWMByhaN5QSf8vJjmkgFEF2tEz9p6JRTSabqw2ZjVy7YsIDYl7U_iE0zU7ny493tJcNHmGFOkxQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=fjWlFByZsmxOFmShxjlYi7BNLLzjTN6fOQhHJlUnTCc-8uojhyVwN6GmCxMU8XjeIsU3v9yQ8XJXspjKZ5FtIw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=TSAq_9tNllkLvxRD93cQeB6POjGlIwiS9wAYXA4FHGsWPAa07tpai6c8i6L4W7u0EHbPjEIPK6Bf450pVpOi1Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=0Y0I9N7QgK1Dwj0otyDeQ848Djs_G1lM-nwqOAbniy3nKzSs48aHmR9Hys-vWyDX-C4cGJoiC8qzcKIOpY_WmA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=B8xRotHIP4CHPbqg8knaeWRTNOjjfIXAo2p7GbJiZJmtMeEfvlrqse9fxEH-FZcMdmBIl6rb-Kr8iDKHNBbLYw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=q3KxHHE5Q1r_VzC_7VIoYY6khJ7fqESoeGJ2j4WP7gv8o0VCXAXQ2cYwCKJSEj8XpOlJWzu2AZ88w_H_5CHNFA2
+                        `.trim().split('\n').map(l => l.trim())
+                    },
+                    {
+                        id: 'kai-2', name: 'Lisa', mode: 'multi',
+                        links: `
+                            https://example.com/lisa1
+                        `.trim().split('\n').map(l => l.trim())
+                    },
+                    {
+                        id: 'kai-3', name: 'Parwati', mode: 'multi',
+                        links: `
+                            https://example.com/parwati1
+                            https://example.com/parwati2
+                        `.trim().split('\n').map(l => l.trim())
+                    },
+                    {
+                        id: 'kai-4', name: 'Purwasiyant', mode: 'multi',
+                        links: `
+                            https://example.com/purwa1
+                        `.trim().split('\n').map(l => l.trim())
+                    }
+                ];
+            }
 
-            function loadUsers() { try { const stored = localStorage.getItem(STORAGE_KEY); if (stored) users = JSON.parse(stored); else users = createDefaultUsers(); } catch (e) { users = createDefaultUsers(); saveUsers(); } }
-            function saveUsers() { localStorage.setItem(STORAGE_KEY, JSON.stringify(users)); }
+            let users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createDefaultUsers();
 
-            function renderUserGrid() {
-                const filter = searchInput.value.toLowerCase();
-                const filteredUsers = users.filter(user => user.name.toLowerCase().includes(filter));
-                usersGrid.innerHTML = '';
-                if (filteredUsers.length === 0) { usersGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #9ca3af; padding: 20px;">Tidak ada user ditemukan.</div>'; return; }
-                filteredUsers.forEach((user, index) => {
-                    const card = document.createElement('button');
-                    card.type = 'button'; card.className = 'user-card'; card.style.setProperty('--stagger', (index * 0.07) + 's');
-                    const modeLabel = user.mode === 'multi' ? 'Multiple link' : 'Single link';
-                    const visitedCount = getVisitedCount(user), totalCount = user.links.length, progressPercent = totalCount > 0 ? (visitedCount / totalCount) * 100 : 0;
-                    card.innerHTML = `<div class="user-card-top"><div class="avatar-circle"><span>${index + 1}</span></div><div class="user-main"><div class="user-name" title="${user.name}">${user.name}</div><div class="user-sub">Project KAI • ${modeLabel}</div><div class="user-progress-bar"><div class="progress-fill" style="width: ${progressPercent}%"></div></div><div class="user-progress-text">${visitedCount}/${totalCount} selesai</div></div></div><div class="user-meta-row"><div class="badge-link"><span class="badge-dot-small"></span><span>${user.mode === 'multi' ? 'Lihat semua link' : 'Buka link survey'}</span></div><div class="user-index">ID: ${user.id}</div></div>`;
-                    card.addEventListener('click', () => handleUserClick(user));
-                    usersGrid.appendChild(card);
+            function render() {
+                const grid = document.getElementById('users-grid');
+                grid.innerHTML = '';
+                users.forEach((user, i) => {
+                    const card = document.createElement('div');
+                    card.className = 'user-card';
+                    card.innerHTML = `
+                        <div style="display:flex; align-items:center; gap: 1rem;">
+                            <div class="avatar-circle">${i+1}</div>
+                            <div style="flex:1">
+                                <div style="font-weight:600; font-size: 0.95rem;">${user.name}</div>
+                                <div style="font-size: 0.7rem; color: var(--muted);">${user.links.length} Tasks assigned</div>
+                            </div>
+                            <div style="color: var(--accent-blue);">→</div>
+                        </div>
+                    `;
+                    card.onclick = () => openLinks(user);
+                    grid.appendChild(card);
                 });
             }
 
-            function handleUserClick(user) {
-                if (!user || !Array.isArray(user.links) || user.links.length === 0) { alert('User ini belum memiliki link, silakan atur di menu Edit User.'); return; }
-                if (user.mode === 'multi' && user.links.length > 0) openLinksView(user);
-                else { const url = user.links[0] || DEFAULT_SURVEY_LINK; markLinkAsVisited(user.id, url); renderUserGrid(); window.open(url, '_blank', 'noopener,noreferrer'); }
-            }
-
-            function openLinksView(user) {
-                currentLinksUser = user; linksUserName.textContent = user.name;
-                const visitedCount = getVisitedCount(user); linksInfoText.textContent = `Total link untuk ${user.name}: ${user.links.length} (${visitedCount} selesai).`;
-                linksButtonsContainer.innerHTML = '';
-                user.links.forEach((url, idx) => {
-                    const btn = document.createElement('button'); btn.type = 'button'; const isVisited = linkStatus[user.id] && linkStatus[user.id][url];
-                    btn.className = isVisited ? 'link-btn visited' : 'link-btn';
-                    const shortUrl = url.length > 40 ? url.slice(0, 37) + '...' : url;
-                    btn.innerHTML = `<div style="text-align:left; flex:1;"><div class="url-label"><span class="link-status-icon">✓</span>Link ${idx + 1}</div><div class="url-small">${shortUrl}</div></div><div class="link-actions"><button type="button" class="btn-copy" title="Copy Link">📋</button><div style="font-size: 0.7rem; color: var(--pink-main);">Buka ></div></div>`;
-                    btn.querySelector('.btn-copy').addEventListener('click', (e) => { e.stopPropagation(); navigator.clipboard.writeText(url).then(() => alert('Link disalin!')).catch(() => alert('Gagal menyalin link.')); });
-                    btn.addEventListener('click', (e) => { if(e.target.closest('.btn-copy')) return; markLinkAsVisited(user.id, url); btn.classList.add('visited'); const newVisitedCount = getVisitedCount(user); linksInfoText.textContent = `Total link untuk ${user.name}: ${user.links.length} (${newVisitedCount} selesai).`; renderUserGrid(); window.open(url, '_blank', 'noopener,noreferrer'); });
-                    linksButtonsContainer.appendChild(btn);
-                });
-                mainView.style.opacity = '0'; setTimeout(() => { mainView.style.display = 'none'; userLinksView.style.display = 'block'; requestAnimationFrame(() => userLinksView.style.opacity = '1'); }, 250);
-            }
-
-            backFromLinks.addEventListener('click', () => { userLinksView.style.opacity = '0'; setTimeout(() => { userLinksView.style.display = 'none'; mainView.style.display = 'block'; requestAnimationFrame(() => mainView.style.opacity = '1'); }, 250); });
-
-            function updateDateTime() { const now = new Date(); const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' }; datetimeText.textContent = now.toLocaleString('id-ID', options); }
-
-            function rebuildEditList() {
-                editUsersList.innerHTML = '';
-                users.forEach((user, index) => {
-                    const row = document.createElement('div'); row.className = 'edit-row';
-                    const linksForMulti = user.links.join('\n'); const singleLink = user.links[0] || "";
-                    row.innerHTML = `<div class="edit-row-top"><div class="edit-label">User ${index + 1}</div><input type="text" class="edit-input name-input" data-id="${user.id}" value="${user.name}" maxlength="40"/><button type="button" class="btn-delete-user" data-id="${user.id}">Hapus</button></div><div class="edit-row-bottom"><div><select class="link-mode-select" data-id="${user.id}"><option value="single">1 Link</option><option value="multi">Multiple Link</option></select></div><div><input type="text" class="link-single-input" data-id="${user.id}" placeholder="https://..."/></div><div><textarea class="link-multi-textarea" data-id="${user.id}" placeholder="Satu link per baris"></textarea><div class="link-multi-hint">Tiap baris satu URL.</div></div></div>`;
-                    editUsersList.appendChild(row);
-                    const modeSelect = row.querySelector('.link-mode-select'), singleInput = row.querySelector('.link-single-input'), multiTextarea = row.querySelector('.link-multi-textarea');
-                    modeSelect.value = user.mode || 'single'; singleInput.value = singleLink; multiTextarea.value = linksForMulti;
-                    function applyModeUI() { if (modeSelect.value === 'multi') { singleInput.style.display = 'none'; multiTextarea.style.display = 'block'; } else { singleInput.style.display = 'block'; multiTextarea.style.display = 'none'; } }
-                    applyModeUI(); modeSelect.addEventListener('change', applyModeUI);
+            function openLinks(user) {
+                if (user.links.length === 0) return alert("No links available.");
+                document.getElementById('main-view').style.display = 'none';
+                document.getElementById('user-links-view').style.display = 'block';
+                document.getElementById('links-user-name').textContent = user.name;
+                const container = document.getElementById('links-buttons-container');
+                container.innerHTML = '';
+                user.links.forEach((link, idx) => {
+                    const btn = document.createElement('div');
+                    btn.className = 'link-item';
+                    btn.innerHTML = `<div style="font-size:0.8rem; font-weight:600;">Open Survey #${idx+1}</div><div style="font-size:0.65rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis;">${link}</div>`;
+                    btn.onclick = () => window.open(link, '_blank');
+                    container.appendChild(btn);
                 });
             }
 
-            function openEditPanel() { rebuildEditList(); editBackdrop.classList.add('show'); }
+            document.getElementById('back-from-links').onclick = () => {
+                document.getElementById('user-links-view').style.display = 'none';
+                document.getElementById('main-view').style.display = 'block';
+            };
 
-            startBtn.addEventListener('click', () => { welcomePage.style.opacity = '0'; setTimeout(() => { welcomePage.style.display = 'none'; mainView.style.display = 'block'; requestAnimationFrame(() => mainView.style.opacity = '1'); }, 350); });
+            document.getElementById('start-btn').onclick = () => {
+                document.getElementById('welcome-page').style.display = 'none';
+                document.getElementById('main-view').style.display = 'block';
+                render();
+            };
 
-            editBtn.addEventListener('click', () => { const pwd = prompt('Masukkan password:'); if (pwd === PASSWORD_EDIT) openEditPanel(); else if (pwd !== null) alert('Password salah.'); });
+            document.getElementById('edit-users-btn').onclick = () => {
+                if(prompt("System Password:") === PASSWORD) {
+                    document.getElementById('edit-panel-backdrop').style.display = 'flex';
+                    const list = document.getElementById('edit-users-list');
+                    list.innerHTML = '';
+                    users.forEach(u => {
+                        const item = document.createElement('div');
+                        item.style.marginBottom = '1.2rem';
+                        item.innerHTML = `
+                            <div style="font-size:0.75rem; margin-bottom:0.4rem; color:var(--accent-blue)">${u.name} (Paste Links Below):</div>
+                            <textarea id="links-${u.id}" style="width:100%; height:80px; background:#020617; border:1px solid #1e293b; color:#fff; padding:10px; font-size:0.75rem; border-radius:10px; resize:none;">${u.links.join('\n')}</textarea>
+                        `;
+                        list.appendChild(item);
+                    });
+                }
+            };
 
-            addUserBtn.addEventListener('click', () => { users.push({ id: `user-${Date.now()}`, name: `User ${users.length + 1}`, mode: 'single', links: [] }); rebuildEditList(); });
-
-            editUsersList.addEventListener('click', (e) => { if (e.target.classList.contains('btn-delete-user')) { if (users.length <= 1) { alert('Minimal 1 user.'); return; } users = users.filter(u => u.id !== e.target.getAttribute('data-id')); rebuildEditList(); } });
-
-            editCancel.addEventListener('click', () => editBackdrop.classList.remove('show'));
-
-            editSave.addEventListener('click', () => {
-                const updated = [];
-                editUsersList.querySelectorAll('.edit-row').forEach(row => {
-                    const name = row.querySelector('.name-input').value.trim() || 'User';
-                    const mode = row.querySelector('.link-mode-select').value;
-                    let links = [];
-                    if (mode === 'multi') links = row.querySelector('.link-multi-textarea').value.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-                    else { const url = row.querySelector('.link-single-input').value.trim(); if (url) links = [url]; }
-                    updated.push({ id: row.querySelector('.name-input').getAttribute('data-id'), name, mode, links });
+            document.getElementById('edit-save').onclick = () => {
+                users.forEach(u => {
+                    const txt = document.getElementById(`links-${u.id}`).value;
+                    u.links = txt.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 });
-                users = updated; saveUsers(); renderUserGrid(); editBackdrop.classList.remove('show');
-            });
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+                document.getElementById('edit-panel-backdrop').style.display = 'none';
+                render();
+            };
 
-            editBackdrop.addEventListener('click', (e) => { if (e.target === editBackdrop) editBackdrop.classList.remove('show'); });
-            searchInput.addEventListener('input', renderUserGrid);
+            document.getElementById('edit-cancel').onclick = () => {
+                document.getElementById('edit-panel-backdrop').style.display = 'none';
+            };
 
-            let hackerClickCount = 0, hackerClickTimer = null;
-            if (projectNameEl) {
-                projectNameEl.style.cursor = 'pointer'; projectNameEl.style.userSelect = 'none';
-                projectNameEl.addEventListener('click', () => {
-                    hackerClickCount++; if (hackerClickTimer) clearTimeout(hackerClickTimer);
-                    hackerClickTimer = setTimeout(() => hackerClickCount = 0, 2000);
-                    if (hackerClickCount >= 5) { document.body.classList.toggle('hacker-mode'); localStorage.setItem('projectKAIHackerMode', document.body.classList.contains('hacker-mode')); alert(document.body.classList.contains('hacker-mode') ? 'SYSTEM BREACHED.' : 'SYSTEM RESTORED.'); hackerClickCount = 0; }
-                });
-            }
-
-            function init() {
-                // FORCE RESET for this specific session if you want to clear old localStorage data immediately:
-                // localStorage.removeItem(STORAGE_KEY); 
-                loadUsers(); loadLinkStatus();
-                if (localStorage.getItem('projectKAIHackerMode') === 'true') document.body.classList.add('hacker-mode');
-                renderUserGrid(); updateDateTime(); setInterval(updateDateTime, 1000);
-            }
-            init();
+            render();
         });
     </script>
 </body>
