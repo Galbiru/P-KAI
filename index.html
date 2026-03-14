@@ -62,45 +62,79 @@
             z-index: 1;
         }
 
-        .welcome-title { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; font-weight: 700; line-height: 1.2; color: #fff; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3); }
-        .project-name { color: var(--accent-blue); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600; margin-bottom: 8px; }
+        .welcome-title { font-family: 'Roboto Mono', monospace; font-size: 2.2rem; font-weight: 700; line-height: 1.2;
+            color: #fff; text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
+        }
+        .project-name { color: var(--accent-blue); font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; font-weight: 600;
+            margin-bottom: 8px; }
 
         #start-btn {
-            margin-top: 2rem; padding: 0.8rem 3rem; border-radius: 999px;
+            margin-top: 2rem;
+            padding: 0.8rem 3rem; border-radius: 999px;
             border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.05);
-            color: #38bdf8; font-weight: 700; letter-spacing: 0.1em;
+            color: #38bdf8;
+            font-weight: 700; letter-spacing: 0.1em;
             transition: all 0.4s ease; cursor: pointer;
         }
-        #start-btn:hover { background: rgba(56, 189, 248, 0.15); box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); transform: translateY(-2px); }
+        #start-btn:hover { background: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.2); transform: translateY(-2px);
+        }
 
         .user-card {
-            display: flex; flex-direction: column; gap: 0.5rem;
+            display: flex;
+            flex-direction: column; gap: 0.5rem;
             padding: 1.2rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.04);
             background: rgba(255,255,255,0.02); cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); margin-bottom: 0.8rem;
         }
-        .user-card:hover { background: rgba(56, 189, 248, 0.04); border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
+        .user-card:hover { background: rgba(56, 189, 248, 0.04);
+            border-color: rgba(56, 189, 248, 0.3); transform: translateY(-3px); }
 
-        .avatar-circle { width: 40px; height: 40px; border-radius: 12px; background: #1e293b; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-blue); font-weight: 700; }
-        .search-input { width: 100%; padding: 0.7rem 1rem; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(2, 6, 23, 0.4); color: #fff; margin-bottom: 1.5rem; outline: none; }
+        .avatar-circle { width: 40px;
+            height: 40px; border-radius: 12px; background: #1e293b; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); color: var(--accent-blue); font-weight: 700;
+        }
+        .search-input { width: 100%; padding: 0.7rem 1rem; border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(2, 6, 23, 0.4); color: #fff; margin-bottom: 1.5rem; outline: none;
+        }
         
-        #edit-users-btn { position: fixed; top: 16px; right: 16px; z-index: 50; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 0.5rem 1rem; font-size: 0.7rem; color: var(--muted); background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); cursor: pointer; }
+        /* Navigation Buttons */
+        .top-nav {
+            position: fixed; top: 16px; right: 16px;
+            display: flex; gap: 8px; z-index: 50;
+        }
+        .nav-btn {
+            border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            padding: 0.5rem 1rem; font-size: 0.7rem; font-weight: 600;
+            backdrop-filter: blur(10px); cursor: pointer; transition: all 0.3s;
+        }
+        #user-demo-btn { color: #fff; background: rgba(56, 189, 248, 0.2); border-color: rgba(56, 189, 248, 0.3); }
+        #user-demo-btn:hover { background: rgba(56, 189, 248, 0.4); transform: translateY(-1px); }
+        #edit-users-btn { color: var(--muted); background: rgba(15, 23, 42, 0.8); }
 
-        .link-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; margin-bottom: 8px; text-align: left; transition: 0.2s; }
-        .link-item:hover { border-color: var(--accent-blue); background: rgba(56, 189, 248, 0.05); }
+        .link-item { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 12px;
+            margin-bottom: 8px; text-align: left; transition: 0.2s; }
+        .link-item:hover { border-color: var(--accent-blue);
+            background: rgba(56, 189, 248, 0.05); }
 
-        .edit-panel-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100; }
-        .edit-panel { background: #0f172a; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 25px; border-radius: 30px; width: 95%; max-width: 500px; }
+        .edit-panel-backdrop { position: fixed; inset: 0;
+            background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 100;
+        }
+        .edit-panel { background: #0f172a; border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 25px;
+            border-radius: 30px; width: 95%; max-width: 500px; }
     </style>
 </head>
 <body>
-    <button id="edit-users-btn">CONFIGURATION</button>
+    <div class="top-nav">
+        <button id="user-demo-btn" class="nav-btn">USER DEMO</button>
+        <button id="edit-users-btn" class="nav-btn">CONFIGURATION</button>
+    </div>
 
     <div class="app-shell">
         <div id="welcome-page">
             <div class="project-name">INTERNAL ACCESS</div>
             <h1 class="welcome-title">Project KAI</h1>
-            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">Cloudy night protocol initialized. Please select your profile to continue.</p>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-top: 10px;">Cloudy night protocol initialized.
+            Please select your profile to continue.</p>
             <button id="start-btn">BEGIN SURVEY</button>
         </div>
 
@@ -136,8 +170,17 @@
             const STORAGE_KEY = "projectKAI_Final_V1";
             const PASSWORD = "Aco123";
 
-            // FUNGSI INI SUDAH DIMODIFIKASI: Cukup isi link di dalam backticks (``)
-            // Satu link per baris, tanpa perlu tanda kutip (') atau koma (,)
+            // Data Akun Demo Khusus
+            const DEMO_USER = {
+                id: 'demo-universal',
+                name: 'Universal Demo',
+                links: [
+                    'https://example.com/demo1',
+                    'https://example.com/demo2',
+                    'https://example.com/demo3'
+                ]
+            };
+
             function createDefaultUsers() {
                 return [
                     {
@@ -363,12 +406,15 @@ https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1ajhDoQVpuXWlUZk_It7
                 ];
             }
 
+
             let users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createDefaultUsers();
 
             function render() {
                 const grid = document.getElementById('users-grid');
                 grid.innerHTML = '';
-                users.forEach((user, i) => {
+                const searchTerm = document.getElementById('search-users').value.toLowerCase();
+                
+                users.filter(u => u.name.toLowerCase().includes(searchTerm)).forEach((user, i) => {
                     const card = document.createElement('div');
                     card.className = 'user-card';
                     card.innerHTML = `
@@ -387,20 +433,27 @@ https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1ajhDoQVpuXWlUZk_It7
             }
 
             function openLinks(user) {
-                if (user.links.length === 0) return alert("No links available.");
+                if (!user.links || user.links.length === 0) return alert("No links available.");
+                document.getElementById('welcome-page').style.display = 'none';
                 document.getElementById('main-view').style.display = 'none';
                 document.getElementById('user-links-view').style.display = 'block';
                 document.getElementById('links-user-name').textContent = user.name;
                 const container = document.getElementById('links-buttons-container');
                 container.innerHTML = '';
                 user.links.forEach((link, idx) => {
+                    if(link.trim() === "") return;
                     const btn = document.createElement('div');
                     btn.className = 'link-item';
-                    btn.innerHTML = `<div style="font-size:0.8rem; font-weight:600;">Open Survey #${idx+1}</div><div style="font-size:0.65rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis;">${link}</div>`;
+                    btn.innerHTML = `<div style="font-size:0.8rem; font-weight:600;">Open Survey #${idx+1}</div><div style="font-size:0.65rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${link}</div>`;
                     btn.onclick = () => window.open(link, '_blank');
                     container.appendChild(btn);
                 });
             }
+
+            // Tombol User Demo Langsung Buka Link View
+            document.getElementById('user-demo-btn').onclick = () => openLinks(DEMO_USER);
+
+            document.getElementById('search-users').oninput = render;
 
             document.getElementById('back-from-links').onclick = () => {
                 document.getElementById('user-links-view').style.display = 'none';
