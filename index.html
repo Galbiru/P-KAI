@@ -97,7 +97,6 @@
             border: 1px solid rgba(255, 255, 255, 0.05); background: rgba(2, 6, 23, 0.4); color: #fff; margin-bottom: 1.5rem; outline: none;
         }
         
-        /* Navigation Buttons */
         .top-nav {
             position: fixed; top: 16px; right: 16px;
             display: flex; gap: 8px; z-index: 50;
@@ -170,16 +169,62 @@
             const STORAGE_KEY = "projectKAI_Final_V1";
             const PASSWORD = "Aco123";
 
-            // Data Akun Demo Khusus
-            const DEMO_USER = {
-                id: 'demo-universal',
-                name: 'Universal Demo',
-                links: [
-                    'https://example.com/demo1',
-                    'https://example.com/demo2',
-                    'https://example.com/demo3'
-                ]
-            };
+            // FUNGSI DEMO DENGAN BACKTICKS (``) - TARO LINK DI SINI BEBAS TANPA TANDA KUTIP PER BARIS
+            function getDemoLinks() {
+                const rawLinks = `
+                    https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=BsA_hOl6S9TzX5YKcIFNMHqhVmU0JqhKthvG1o3UVfus9cxmj2A1UhWWvVc3nDVFDYb29h8V0uwJBq1BslE_CQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=mLFIkj-xnxsYOC2ns_dNdLYzGluu6N53K0kvojHi5YjzsOjMpOQDgEj3JualrfVjdfwmo3TgTHVU-h6MKtuykA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=8k8Mllsj0DztG_0dnAKrmB12t2nl-pGahlDB90FX_qxcJFHYs7RQWl11_su5ls9fIkRblI7ZvXW-XKSnyzCNdQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=qtap_cfxg4aHS9kT4JQszI5Ba5iWu3VPB9NsIuPWZjQawQXYvG_c5OdHXpJBDePWf7DNqW6cy0-30wZdcoMCxg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=CG0vtDgFLcpr_DI-qAN3f4MJ7XlCCwCjpbzN_XzP7n3TjXpwEIVCODqjd3_KVOdCNmuoqpe-nkvtA3a-dGTAjQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=UqqxieM-aNnbgOMfrPBz7QS5tI-MlYPyw5qF8wvSWzCD5w4qMAABYggeSYvTb5xCRalSg5FCPAr0Pho375YBCQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=_hUdXhXz-hWuT-R47-ahkoVkDCQ48qx-F68FydxPpTV9xwvqP_Wtl1NZeeHnsmglm55I1rTFHj_5fjSwEKSUSA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=9yjLFHlKk-R3KEOeygaBtZNg76B20XPzru2ED439gYW3-amKq3wZnWKKRjZu4uj-sgnYwNK9knN2vSmnRKXQoQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=f3qAbwKRFarA-x_I8YQCa-wgssrS7FH77hzCUCwQqbZmyiDyVNKQhzGbRmrtJSamp6BO5eCdFMNPcLFnkiWzZQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=BpQ4dIAVxhGdSgkLlWs3M4Tdxn4uKvXVZNNhQ8akn0JiNOeN4JtdViX7hI5NOdzuDn-ghG0PrijTj5RKpNa3Qw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=hLc6jBgy4GV_eNP-k5QamhDktZnCd6TTAXxAt2rSR7j3CwbR2hXTlIYwY0zMmJEaN50c01Do86iyEMNE2G5QZg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=I_va-r6dKOTwRxYlU-VnzdUfkWTnkxpCuxvN91go8U7IanYZq5Z08Y9AwJWWGMcgaBA39tlBp3Hyapk-us7LWw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=RnBLPCdKzukHahsdcvlqfZ2rJ76HDj-wUuiXQ4xmA3NBfEflDDwbaWZcqq7F96omLvLBSVslZqIz_JEGlb6LyA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=Cu046-8KjwplC7g1sCgdkwLjqRogV1hjZ4vSnzMHGPeEMJR3WO_NmiSgH4cbxBV7OTVn-YMr7uaLjO2t2P8Q_Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=we0tJOJrBg-lk_yiZy7uevfgTuhYBE2Au0WFT9X53CHHwJoJwGEWIZ4imdCNqfBbEPV4G81SRpenlkqh_QSumQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=z9ekx2K1qKM--bvTku4jWREPRnU8BpJGRA4QvKJWoZTv8V7z0dSerQeKt_5csqNbnnbZjuQFKWtQ_aP7V_-ATw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=9o8JLZDjBHKlwcdWQZVVFBRMxAl5tZf-joRhvAFK3jRmkbwHMUrnwoXL_XK__BjgtMriu6V4A1U57AaCTfAr8g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=5kjq_hU0L9lF8V0HJjEBpHxsa4MBX44MdH-tZZe35iTQg7r-79X4eM0WhA4l7ckKdoUm5dZdV28fx3MBxSRqtw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=meblzQWqzIbDK0Tgv4I7g7KVjcxKOCdRGkc3UALsjM2fNv-bCkliJYpEwGBpfUEDAkXvW1CKaYBU5jP1SJWKKg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=MOWn2Ud2fpsv0LYUrDMPUFWE99a8_X_JUI9oO6Or_d71uSqWR_IxyxmdprKLdMfiVFu7o8zHno5yHDlV-uyIYg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=m6Qiyr2TcM5bzGg4wAqyYunLtVqWWNUSQI6kf54pSmbnXIM7UQZycmbJPrN58Z1-QlfnDD1QS5TWmoNaj-KU1Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=JgKSyuSUezNMfBbroi7IxBLDJolAteR2QPoXyuvZNiRENqWucnaazsL-iRuohALS3JqjVAH4oITmnK2DBqLKkw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=s3SoGhe0JegjQ2L_R8BkwG7_uxuyyO93giuSFKlFX0ADeqXDuV-dZsKyONPjWK-NzOaDJzYHKzuH7reIGYKEBA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=tXOZ0N6ZT-iBdoZB-1PW9611qBUL9VQX7H7zO5DuutCXAqGHXoFosLXSg-zsTKvnZYP8m8uyRjJxC_fPD-UbxQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=4VoK3TBxEaafM5HGtg68s-ZFWOgLhMT_CSK0b1XIh0ce8_0q-dw8mpBbhJYR68FMGBDc59UXZAyt6js8sFCeGQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=jaBYlPd0U-almiv5xExoMCTzZGTS1aQjYEId0-2ozjgePvM2X34pJ1OLy2WgC2kpOCUWhENvDcoDb0rRxN8HFw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=rScuMKaOTo6gASxxeA1SgWNfknPi1KeM_8SG0iubjgJMxvm07uCJjuzb5oKU8yduJb8kZbmx04fUIj6pJuhyBg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=tzVLWxnOdTrKQZqmUrNIP6nhdCH3z7gJjGfbItuIer9ensYQU0I1IUhq_b3Ox9WuDkxEY2zvpSiIMSRNk6v_3Q2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=AE6V4HG8qXSC1sdztsEQBCfuJxTcYgDYqygDT8g5VSz0W6eYT3SDhhmlTriBB_VaIB3BseEyTt8BvrYBMKN3jA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=34YnRJYtiUC72nn6nlEN4420_c_udFED2UpltDX9rRhX4k3WJ8YY5cuoqKKDkmD2dlTMjruOgpzO7uzg-PpD8g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=ehOiPumvdd16o0FW2arml8Qe99-R_usMuh2m-eMerBSnvTE8H7kq8_Kr-BiHv_H8Jsm2cXz4eoqHEMTovZluHw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=JUNaAHPMLNPFXj3xQI0hGm3oWl90lFEJvxqh5dv7SXek4tnxR1hlf_3ZZhUb8WZWT2D5LscYJWTePqMP4IkQFw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=xY4vkPPLvK2uLkTTofZNfd3039I3otelP4zedccrmWlRc3Lwe266W7GDxiUAjZ8e4lZgzGslcpaztmUMjINFxw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=P3rdAMK18xe48Z7cg2Tiw8lYENEN2gnb0sngImgxvimZe3fXWjoa2_l_7RsasZB-hC6IWU4DVhG6mqhsqQxPFQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=KYvU_3yA0TgwMgGA9MS5b5DjAu4-DpsnPgz5mdOT1eEPOgUUEDQFoUQkhAEO3gJ-OSHpWi2srDKZZoy3ogLMFA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=2Ev37Or6_BJ1_jfjRgM2OlvTfogoEaIvRLCWcKqFdYUOOX6nH94OWzZo3IAKHW8j82lskUhI1_3NOOA699aksA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=lC1mm5Dnm_KTFZmFi_ADtJLXRO_zlmGZyj9jP8VkAzAo_-4_PlNiISIMyEIIe4sP8WB0O98OjpirSo2pBUHGXQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=vZLBLxcICCQvs1FVDd8gd5FB_CXivrras414kMZocXNYZeF4iDqvGvkdtaoiteW3QmiIm1vcT97pDwffHfjc4w2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=S6COEnKjUoQmUscNk5Qwnc9glyQAatltVRyHsP8H6NGEsTWhFPOXDRfiesEcAdG3zVdsw94PX5_z4ji4l2jHFg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=_uPTxAX50hpWIMBdCZBnhp5HZzxLRZa7EgJ6HYK0Bsl-22QQtrD8lu5dY8EV1ZlvCrZe-8hgMGQOeVGlqDNyBg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=mFpfrurlV5C3O_2R4B6HQzC0zJ1zeO5cKPbRHyS1PLdcnFsKJM8ea19RlFfZDlPjOWoHFXkFL2DyE_as3PRw7g2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=6jk0SYqlGWUWI6U4KWr_c9IG8v4jy5o4a5kvCJBb19pnDq6XLlB-t6E3EOdYiDeUDeLHRHAFjmZ4A5IvOBRuvA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=nwm6MbjrwrRIkjIV6DDn6gk8c5_wQTcvKr5lxqm3s32BVqlZyIHU8LSI0YclOj2K864SBEjQlTGYhVim_QhsqQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=hJ0kdiuHM7Azo66ezSC_l_iVLBUmH5hu1VorwNvDXi8NVfyO0HOqZNqxGTx9MBu2dEsjzQ1iyHphDz4tZe5SiA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=4qeg9kaUWSnsQmvTzn7uJJU0g88QiNkx6t3d8u3doo2c4fHCD2wRmLp0BBbSGrX6xGy3fo2GQk1FqvCiH-oOGw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=M7rzfs8PjXTLJzcghyYlKVSWtu8CJprX4NDc2znF3fIh1iVvFzaixQkBeN2D13vA32Vgo06MHfF7PqGPQ3NaDg2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=IpRwePd-Eb75R9mkef7dEKyBeYODbHMy3BAEAp1zi037pRy0lUcwO0F7Xi9OvmLFxce_rxfGyHOOjg5DsVCQyw2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=W-5MivvBmP2nn-1s0P95Eckbz0kQ13k-2lj2_eMkiIqhwOGnx20Eudv9rp2Gk_wOBabD-QvR5ijp4xCODMP2eA2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=qeDQqCIDDog-tZJ8Rawf9WUAnMOu6VLLm-jUzrfv-5s3Z_Hb2UFmflBg7eiI_S1vf5OKr6luh_X98IvqB430rQ2
+https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=gJrd57G1VhQIAm_KPiRaSX6W0ePTEYPKSZZLP3KhF1D180UxvnABt7jLiyBOs1mjQNsjFOHTQT_1w5Ye6sz7ZQ2
+                `;
+                return rawLinks.trim().split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            }
 
             function createDefaultUsers() {
                 return [
@@ -406,7 +451,6 @@ https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1ajhDoQVpuXWlUZk_It7
                 ];
             }
 
-
             let users = JSON.parse(localStorage.getItem(STORAGE_KEY)) || createDefaultUsers();
 
             function render() {
@@ -441,7 +485,6 @@ https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1ajhDoQVpuXWlUZk_It7
                 const container = document.getElementById('links-buttons-container');
                 container.innerHTML = '';
                 user.links.forEach((link, idx) => {
-                    if(link.trim() === "") return;
                     const btn = document.createElement('div');
                     btn.className = 'link-item';
                     btn.innerHTML = `<div style="font-size:0.8rem; font-weight:600;">Open Survey #${idx+1}</div><div style="font-size:0.65rem; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${link}</div>`;
@@ -450,8 +493,11 @@ https://www.b2beresearch.com/wix/p170851299465.aspx?__sid__=1ajhDoQVpuXWlUZk_It7
                 });
             }
 
-            // Tombol User Demo Langsung Buka Link View
-            document.getElementById('user-demo-btn').onclick = () => openLinks(DEMO_USER);
+            // Handler Tombol User Demo
+            document.getElementById('user-demo-btn').onclick = () => {
+                const demoUser = { name: 'Universal Demo', links: getDemoLinks() };
+                openLinks(demoUser);
+            };
 
             document.getElementById('search-users').oninput = render;
 
